@@ -1,17 +1,14 @@
 package motores;
 
-public class MotorFactory {
-    public static final String ORACLE = "ORACLE";
-    public static final String POSTGRE = "POSTGRE";
-    public static final String MARIADB = "MARIADB";
-    public static final String SQLSERVER = "SQLSERVER";
-    public static MotorSQL create(String motor){
-        switch (motor){
-            case POSTGRE:
+public final class MotorFactory {
+    public static final int POSTGRE = 1;
+
+    private MotorFactory() {
+        }
+        public static MotorSQL create(int motor) {
+            if (motor == POSTGRE) {
                 return new PostgreMotorSQL();
-            default:
-                throw new IllegalArgumentException(
-                        "Motor no soportado");
+            }
+            throw new IllegalArgumentException("Motor SQL no soportado: " + motor);
         }
     }
-}

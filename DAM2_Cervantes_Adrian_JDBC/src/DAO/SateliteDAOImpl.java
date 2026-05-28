@@ -1,5 +1,4 @@
 package DAO;
-
 import beans.Agencia;
 import beans.DetalleSatelite;
 import beans.Satelite;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SateliteDAOImpl extends AbstractDAO<Satelite> implements SateliteDAO {
+public class SateliteDAOImpl extends AbstractDAO<Satelite> {
     private static final String INSERT =
             "INSERT INTO satelites (nombre, orbita, peso, coste, activo, fecha_lanzamiento, agencia_id, autor_examen) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -127,7 +126,6 @@ public class SateliteDAOImpl extends AbstractDAO<Satelite> implements SateliteDA
         }
     }
 
-    @Override
     public List<Satelite> findByAgencia(int agenciaId) throws SQLException {
         List<Satelite> satelites = new ArrayList<>();
         try (Connection connection = openConnection();
@@ -144,7 +142,6 @@ public class SateliteDAOImpl extends AbstractDAO<Satelite> implements SateliteDA
         }
     }
 
-    @Override
     public Satelite findWithDetail(int id) throws SQLException {
         try (Connection connection = openConnection();
              PreparedStatement ps = connection.prepareStatement(FIND_WITH_DETAIL)) {
@@ -157,7 +154,6 @@ public class SateliteDAOImpl extends AbstractDAO<Satelite> implements SateliteDA
         }
     }
 
-    @Override
     public List<Satelite> findActiveWithAgencyAndDetail() throws SQLException {
         List<Satelite> satelites = new ArrayList<>();
         try (Connection connection = openConnection();
@@ -172,7 +168,6 @@ public class SateliteDAOImpl extends AbstractDAO<Satelite> implements SateliteDA
         }
     }
 
-    @Override
     public int updateDynamic(int id, Map<String, Object> fields) throws SQLException {
         return executeDynamicUpdate("satelites", "id", id, fields);
     }
